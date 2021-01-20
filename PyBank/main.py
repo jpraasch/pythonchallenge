@@ -4,8 +4,11 @@ import csv
 #Open and Read CSV
 csvbank = os.path.join("Resources", "budget_data.csv")
 
+
 with open(csvbank) as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=",")
+   #Need to skip header (Thanks ravikanth-kolla github)
+    next(csv_reader)
 
     #Delecaring Variables
     total_months = []
@@ -46,7 +49,17 @@ with open(csvbank) as csv_file:
     #total average change ($0)
     print ("Average Change: $", round(AvgChange))
     #Greatest Increase in Profits (Month-Year Amount)
-    print("Greatest Increase: ", Greatest_Decrease_Date, "($", Greatest_Increase,  ")")
+    print("Greatest Increase: ", Greatest_Decrease_Date, "($", Greatest_Increase, ")")
     #Greats Decreas in Profits (See above)
     print("Greatest Decrease: ", Greatest_Decrease_Date, "($", Greatest_Decrease, ")")
 
+#Print text file
+with open('financial_analysis.txt', 'w', newline='') as text:
+    text.write("  Financial Analysis"+ "\n")
+    text.write("----------------------------------------------------------\n\n")
+    text.write("    Total Months: " + str(len(total_months)) + "\n")
+    text.write("    Total Profits: " + "$" + str(sum(total_revenues)) +"\n")
+    text.write("    Average Change: " + '$' + str(round(AvgChange)) + "\n")
+    text.write("    Greatest Increase in Profits: "+ Greatest_Decrease_Date + "($"+ str(Greatest_Increase) + ")\n")
+    text.write("    Greatest Decrease in Profits: "+ Greatest_Decrease_Date + " ($"+ str(Greatest_Decrease) + ")\n")
+    text.write("----------------------------------------------------------\n")

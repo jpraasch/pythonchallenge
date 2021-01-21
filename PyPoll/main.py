@@ -11,7 +11,7 @@ with open(csvpoll) as csv_file:
 
     # Declaring Variables
     candidates = {}
-    count = 0
+    totalcount = []
     votes_cast = 0
     percentvote = 0
     mostvotes = 0
@@ -21,8 +21,8 @@ with open(csvpoll) as csv_file:
     for row in csv_reader:
 
         names = row[2]
-        count += 1
-               
+        totalcount.append(row[2])
+        
         # found keys() it online and on someones github (314cascio), the keys functions being used to compare the names in row two and allocate 
         # the right canidate
         if names in candidates.keys():
@@ -32,7 +32,7 @@ with open(csvpoll) as csv_file:
 
     print("Election Results")
     print("-------------------------")
-    print(f"Total Votes: {count}")
+    print(f"Total Votes: {len(totalcount)} ")
     print("-------------------------")
 
 
@@ -41,7 +41,7 @@ with open(csvpoll) as csv_file:
         votes_cast += candidates[names]
 
         # finding the percent for each candidate (using 314cascio code to keep code clean)
-        percentvote = (candidates[names])/(count) * 100
+        percentvote = (candidates[names])/len(totalcount) * 100
         print(f"{names}: {int(percentvote)}% {votes_cast}")
         
         if candidates[names] > mostvotes:
@@ -56,8 +56,9 @@ with open(csvpoll) as csv_file:
 with open('poll_results.txt', 'w', newline='') as text:
     text.write("  Election Results""\n")
     text.write("----------------------------------------------------------\n\n")
-    text.write(f"Total Votes: {count} \n")
+    text.write(f"Total Votes: {len(totalcount)} \n")
     text.write("----------------------------------------------------------\n\n")
+    # credit to multiple sources telling me to do this but not realizing to just run another for loop
     for names in candidates:
         text.write(f" {names}: {int(percentvote)}% {votes_cast} \n")
     text.write("----------------------------------------------------------\n\n")

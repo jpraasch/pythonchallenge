@@ -21,15 +21,6 @@ with open(csvbank) as csv_file:
         total_months.append(row[0])
         total_revenues.append(int(row[1]))
 
-    #Print out Analysis
-    print("Financial Analysis")
-    print("---------------------------------------------------------------------")
-    #total months
-    print("Total Months: ", len(total_months))
-    #Total ($)
-    print("Total: $ ", sum(total_revenues))
-
-
     for i in range (1, len(total_revenues)):
 
         #Average change between months sent to a list
@@ -46,6 +37,14 @@ with open(csvbank) as csv_file:
         Greatest_Decrease = min(Difference)
         Greatest_Decrease_Date= str(total_months[Difference.index(min(Difference))])
 
+
+    #Print out Analysis
+    print("Financial Analysis")
+    print("---------------------------------------------------------------------")
+    #total months
+    print("Total Months: ", len(total_months))
+    #Total ($)
+    print("Total: $ ", sum(total_revenues))
     #total average change ($0)
     print ("Average Change: $", round(AvgChange))
     #Greatest Increase in Profits (Month-Year Amount)

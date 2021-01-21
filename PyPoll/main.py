@@ -16,19 +16,19 @@ with open(csvpoll) as csv_file:
     percentvote = 0
     mostvotes = 0
     mostvotenames = ""
-
+    
     # counting of the votes
     for row in csv_reader:
 
-        candidatenames = row[2]
+        names = row[2]
         count += 1
-        # found if online and on someone github (314cascio), the keys functions being used to compare the names in row two and allocate 
+               
+        # found keys() it online and on someones github (314cascio), the keys functions being used to compare the names in row two and allocate 
         # the right canidate
-        if candidatenames in candidates.keys():
-            candidates[candidatenames] =+ 1
+        if names in candidates.keys():
+            candidates[names] += 1
         else:
-            candidates[candidatenames] = 1
-
+            candidates[names] = 1
 
     print("Election Results")
     print("-------------------------")
@@ -36,22 +36,32 @@ with open(csvpoll) as csv_file:
     print("-------------------------")
 
 
-    # Finding the total # votes and casting it to a variable
-    for candidatenames in candidates:
-        votes_cast =+ candidates[candidatenames]
+    # Finding the total # votes for each canditate
+    for names in candidates:
+        votes_cast += candidates[names]
 
         # finding the percent for each candidate (using 314cascio code to keep code clean)
-        percentvote = (candidates[candidatenames])/(count) * 100
-        print(f"{candidates}: {int(percentvote)} % {votes_cast}")
-
-        if candidates[candidatenames] > mostvotes:
-            mostvotenames = candidatenames
-            mostvotes = candidates[candidatenames]
+        percentvote = (candidates[names])/(count) * 100
+        print(f"{names}: {int(percentvote)}% {votes_cast}")
+        
+        if candidates[names] > mostvotes:
+            mostvotenames = names
+            mostvotes = candidates[names]
 
     print("-------------------------")
     print(f"WINNER: {mostvotenames}")
     print("-------------------------")
 
-
+#Print text file
+with open('poll_results.txt', 'w', newline='') as text:
+    text.write("  Election Results""\n")
+    text.write("----------------------------------------------------------\n\n")
+    text.write(f"Total Votes: {count} \n")
+    text.write("----------------------------------------------------------\n\n")
+    for names in candidates:
+        text.write(f" {names}: {int(percentvote)}% {votes_cast} \n")
+    text.write("----------------------------------------------------------\n\n")
+    text.write(f"WINNER:  {mostvotenames} \n")
+    text.write("----------------------------------------------------------\n")
 
 

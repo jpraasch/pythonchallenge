@@ -9,7 +9,7 @@ with open(csvpoll) as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=",")
     next(csv_file)
 
-    # Declaring Variables as empty Dictiionaries and lists
+    # Declaring Variables
     candidates = {}
     count = 0
     votes_cast = 0
@@ -19,31 +19,34 @@ with open(csvpoll) as csv_file:
 
     # counting of the votes
     for row in csv_reader:
-        candidatevote = row[2]
+
+        candidatenames = row[2]
         count += 1
         # found if online and on someone github (314cascio), the keys functions being used to compare the names in row two and allocate 
         # the right canidate
-        if candidatevote in candidates.keys():
-            candidates[candidatevote] =+ 1
+        if candidatenames in candidates.keys():
+            candidates[candidatenames] =+ 1
         else:
-            candidates[candidatevote] = 1
+            candidates[candidatenames] = 1
+
+
     print("Election Results")
     print("-------------------------")
-    print("Total Votes: {count}")
+    print(f"Total Votes: {count}")
     print("-------------------------")
 
 
     # Finding the total # votes and casting it to a variable
-    for candidatevote in candidates:
-        votes_cast =+ candidates[candidatevote]
+    for candidatenames in candidates:
+        votes_cast =+ candidates[candidatenames]
 
         # finding the percent for each candidate (using 314cascio code to keep code clean)
-        percentvote = (candidates[candidatevote])/(count) * 100
+        percentvote = (candidates[candidatenames])/(count) * 100
         print(f"{candidates}: {int(percentvote)} % {votes_cast}")
 
-        if candidates[candidatevote] > mostvotes:
-            mostvotenames = candidates
-            mostvotes = candidates[candidatevote]
+        if candidates[candidatenames] > mostvotes:
+            mostvotenames = candidatenames
+            mostvotes = candidates[candidatenames]
 
     print("-------------------------")
     print(f"WINNER: {mostvotenames}")

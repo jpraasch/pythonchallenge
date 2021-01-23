@@ -52,7 +52,7 @@ with open(csvbank) as csv_file:
     #Greats Decreas in Profits (See above)
     print("Greatest Decrease: ", Greatest_Decrease_Date, "($", Greatest_Decrease, ")")
 
-#Print text file
+#Print text file (Found this online)
 with open('financial_analysis.txt', 'w', newline='') as text:
     text.write("  Financial Analysis"+ "\n")
     text.write("----------------------------------------------------------\n\n")

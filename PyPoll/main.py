@@ -21,10 +21,10 @@ with open(csvpoll) as csv_file:
     for row in csv_reader:
 
         names = row[2]
+        #This step is more for printing then anything.
         totalcount.append(row[2])
         
-        # found keys() it online and on someones github (314cascio), the keys functions being used to compare the names in row two and allocate 
-        # the right canidate
+        # found keys() command online and on someones github (314cascio), used the user example cause it fit what we are doing.
         if names in candidates.keys():
             candidates[names] += 1
         else:
